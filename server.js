@@ -1,16 +1,13 @@
 const express = require('express');
-const request = require('request');
 const app = express();
 
-app.get('/proxy', (req, res) => {
-  const url = req.query.url;
-  if (!url) {
-    return res.status(400).send('URL is required');
-  }
-  request(url).pipe(res);
+// Endpoint untuk mengarahkan permintaan ke "https://doujindesu.tv"
+app.get('/', (req, res) => {
+  res.redirect(301, 'https://doujindesu.tv');
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Proxy server listening on port ${PORT}`);
+// Menjalankan server backend di port 3000
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`Server berjalan di port ${port}`);
 });
